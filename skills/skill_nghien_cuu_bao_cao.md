@@ -69,11 +69,13 @@ Thầy giáo rất thích nhìn thấy Toán. AI phải tự suy luận ra từ 
 Khi xuất văn bản, yêu cầu AI cung cấp Template hoặc hướng dẫn tạo file với quy chuẩn sau (dựa trên **MauDATN_2021 TDTU**).
 
 ### 4.1 Quy tắc Trình bày Layout (Áp dụng nếu render qua python-docx)
+Dựa theo chuẩn `MauDATN_2021`:
 - **Cỡ chữ:** 13pt (Toàn bài). Font: **Times New Roman**.
 - **Giãn dòng:** 1.5 lines.
-- **Lề (Margins):** Trên/Dưới/Phải: 2cm, Trái: 3cm.
+- **Lề (Margins):** Trên: 3.5cm, Dưới: 3.0cm, Trái: 3.5cm, Phải: 2.0cm.
 - **Căn lề (Alignment):** Justify (Canh đều 2 bên).
-- **Đánh số trang:** Ở giữa (Center), lề dưới. Từ phần Mở đầu mới bắt đầu đếm 1, 2, 3.
+- **Đánh số trang:** Ở giữa (Center), lề trên hoặc lề dưới.
+- **Danh mục từ viết tắt:** Luôn để đầu trang nếu có quá nhiều từ viết tắt.
 
 ### 4.2 Quy tắc Đánh Heading
 - **Chương:** `CHƯƠNG 1: TỔNG QUAN` (IN HOA, Bold, 14pt, Căn giữa).
@@ -102,21 +104,23 @@ Trình bày hiện trạng thực tế. Tại sao lại chọn đề tài này? 
 - Thiết kế mạch cứng điều khiển [X].
 - Xây dựng phần mềm tương tác [Y].
 ### 1.3 Phạm vi và Đối tượng
-Hệ thống thử nghiệm trong phạm vi hẹp. Tập trung vào vi điều khiển [ESP32/Arduino/NodeJS].
+Hệ thống thử nghiệm trong phạm vi hẹp. Tập trung vào vi điều khiển [ESP32/Arduino] và hệ thống Web App / Desktop App (React, NodeJS, Electron).
 
-## CHƯƠNG 2: CƠ SỞ LÝ THUYẾT & LINH KIỆN
-### 2.1 Các giao thức sử dụng
-- **Giao thức MQTT / HTTP / I2C:** Trình bày lý thuyết hoạt động, tốc độ baud rate, dải tần. [Dẫn chứng từ Source Code].
-### 2.2 Các linh kiện / Công nghệ phần mềm
-- Lập bảng **Bảng 2.1: Danh sách phần cứng/phần mềm**.
-- Nếu phần cứng: Liệt kê MCU, Sensor, Driver. Mô tả Datasheet, cấp điện áp (VD: 3.3V vs 5V logic level).
-- Nếu phần mềm: Giới thiệu thư viện (React, Express, FastAPI).
-### 2.3 Cơ sở toán học và Động lực học
-Trình bày công thức. Ví dụ:
-- Công thức điện: Tính chọn điện trở kéo lên bảo vệ nút nhấn $R = \frac{V_{cc} - V_{IH}}{I_{IH}} \approx 10k\Omega$.
-- Tần số PWM cho Servo [trích xuất từ code ledcSetup].
+## CHƯƠNG 2: CƠ SỞ LÝ THUYẾT & KỸ THUẬT CÔNG NGHỆ
+### 2.1 Các giao thức phần cứng & truyền thông
+- Trình bày lý thuyết giao thức: WebSockets (độ trễ <10ms, realtime), MQTT, HTTP, I2C, ROS Bridge (Giao tiếp ROS2 với Backend). [Dẫn chứng từ Source Code].
+### 2.2 Các linh kiện phần cứng (Nếu có)
+- Lập bảng **Bảng 2.1: Danh sách linh kiện**. Liệt kê MCU (ESP32-S3), Sensor (LiDAR, Encoder, MPU6050), Driver (L298N). Phân tích Datasheet, sơ đồ chân GPIO.
+### 2.3 Công nghệ Web App và Phần Mềm
+- **Frontend / Desktop App:** React, Electron framework (Xử lý ứng dụng đa nền tảng).
+- **Kiến trúc xử lý:** Mô tả việc dùng **Web Workers** để giải quyết các bài toán tính toán nặng và liên tục (VD: Xử lý hàng ngàn điểm LiDAR point cloud trên giây, tính toán Odometry) nhằm không bị đơ UI (Main Thread), giúp đảm bảo render mượt mà ở 60fps.
+### 2.4 Cơ sở toán học và Động lực học thuật toán
+Trình bày công thức:
+- **Kinematics (Động học):** Hàm tính toán Forward/Inverse Kinematics của Robot (vL, vR từ v, $\omega$) hoặc cơ sở tính góc Euler $q = [x, y, \theta]$.
+- **Giải thuật Điều khiển:** Phân tích thuật toán Virtual Axle (Bù trục ảo), Feedforward kết hợp PI controller giúp giảm tải Integral và tăng giảm tốc mượt mà ($v_{current} = \dots$). Nếu không làm Robot, giải thích vòng lặp cơ bản.
+- **Hệ thống nhúng:** Tính toán điện trở, công suất điện $P=UI$. Phân tích định thời vòng lặp (Time-based scheduling), dùng Async non-blocking tần số ngắt ngõ vào (VD 50Hz cho Motor PI, 30Hz cho Telemetry).
 
-## CHƯƠNG 3: THIẾT KẾ VÀ THI CÔNG HỆ THỐNG
+## CHƯƠNG 3: THIẾT KẾ CẤU TRÚC VÀ TÍCH HỢP HỆ THỐNG
 ### 3.1 Sơ đồ khối tổng thể
 [Chèn Mermaid Diagram Sơ đồ khối]
 *Hình 3.1: Sơ đồ khối hệ thống*
@@ -165,10 +169,10 @@ def tao_bao_cao_tdtu(file_name="Bao_Cao_TDTU.docx"):
     # 1. SETUP PAGE MARGINS TDTU
     sections = doc.sections
     for section in sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(3)
-        section.right_margin = Cm(2)
+        section.top_margin = Cm(3.5)
+        section.bottom_margin = Cm(3.0)
+        section.left_margin = Cm(3.5)
+        section.right_margin = Cm(2.0)
         
     # 2. SETUP STYLES TDTU
     style = doc.styles['Normal']
@@ -186,7 +190,7 @@ def tao_bao_cao_tdtu(file_name="Bao_Cao_TDTU.docx"):
     p = doc.add_paragraph('Thay nội dung Markdown do AI xuất vào các hàm tạo văn bản này. Ví dụ: Thiết kế mạch...')
     
     doc.save(file_name)
-    print(f"✅ Đã xuất file {file_name} chuẩn format TDTU với margin 3x2x2x2!")
+    print(f"✅ Đã xuất file {file_name} chuẩn format TDTU với margin 3.5x3.0x3.5x2.0!")
 
 if __name__ == "__main__":
     tao_bao_cao_tdtu()
