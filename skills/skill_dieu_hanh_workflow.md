@@ -49,8 +49,10 @@ flowchart LR
   - Up Version / Migration: Bật **`skill_nang_cap.md`** lập Backup Zone trước khi phá đồ.
 
 ### Bước 5: Viết Báo Cáo & Thu Hoạch (Documentation)
-- **Trạng thái user:** "mai nộp báo cáo", "làm file word lẹ"
-- 🛠️ **Hành động AI:** Dùng **`skill_viet_docs.md`** để tuôn tràng giang đại hải file Word theo chuẩn `MauDATN_2021` luận văn TDTU.
+- **Trạng thái user:** "mai nộp báo cáo", "làm file word lẹ", "giải thích code"
+- 🛠️ **Hành động AI:**
+  - Viết README, comment code nhanh: Dùng **`skill_viet_docs.md`**.
+  - Phân tích chuyên sâu toàn bộ code & Xuất Luận Văn DOCX (có sơ đồ/toán): Bật siêu kỹ năng **`skill_nghien_cuu_bao_cao.md`**.
 
 ---
 
@@ -63,6 +65,6 @@ flowchart LR
 | *"Viết giùm tui boilerplate Zustand React"* | ➔ Step 2: `skill_code_mau` (Snippet Factory) |
 | *"Nâng cái đồ án này lên NodeJS 20"* | ➔ Step 4: `skill_nang_cap` (Upgrade Guard) |
 | *"Chê UI này phèn quá m ơi"* | ➔ Step 3: `skill_giao_dien` (Premium Cinematic) |
-| *"Bà GVHD đòi file báo cáo 5 chương :("* | ➔ Step 5: `skill_viet_docs` (Docs/Thesis) |
+| *"Bà GVHD đòi file báo cáo 5 chương :("* | ➔ Step 5: `skill_nghien_cuu_bao_cao` (Deep Thesis) |
 
 > ⚠️ **QUY TẮC CỨNG:** Mỗi session chát, AI LUÔN định hình mình đang ở Step nào của Flow (1 -> 5) và announce để user theo kịp mạch tư duy. Không để rớt nhịp!
